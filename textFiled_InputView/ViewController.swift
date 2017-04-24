@@ -24,42 +24,42 @@ class ViewController: UIViewController , UITextFieldDelegate{
     }
     
     //MARK:- textFiled Delegate
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         self.pickUpDate(self.textField_Date)
     }
     
     //MARK:- Function of datePicker 
-    func pickUpDate(textField : UITextField){
+    func pickUpDate(_ textField : UITextField){
         
         // DatePicker
-        self.datePicker = UIDatePicker(frame:CGRectMake(0, 0, self.view.frame.size.width, 216))
-        self.datePicker.backgroundColor = UIColor.whiteColor()
-        self.datePicker.datePickerMode = UIDatePickerMode.Date
+        self.datePicker = UIDatePicker(frame:CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 216))
+        self.datePicker.backgroundColor = UIColor.white
+        self.datePicker.datePickerMode = UIDatePickerMode.date
         textField.inputView = self.datePicker
         
         // ToolBar
         let toolBar = UIToolbar()
-        toolBar.barStyle = .Default
-        toolBar.translucent = true
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
         toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
         toolBar.sizeToFit()
         
         // Adding Button ToolBar
-        let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: "doneClick")
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: "cancelClick")
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(ViewController.doneClick))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(ViewController.cancelClick))
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        toolBar.userInteractionEnabled = true
+        toolBar.isUserInteractionEnabled = true
         textField.inputAccessoryView = toolBar
         
     }
     
     // MARK:- Button Done and Cancel
     func doneClick() {
-        let dateFormatter1 = NSDateFormatter()
-        dateFormatter1.dateStyle = .MediumStyle
-        dateFormatter1.timeStyle = .NoStyle
-        textField_Date.text = dateFormatter1.stringFromDate(datePicker.date)
+        let dateFormatter1 = DateFormatter()
+        dateFormatter1.dateStyle = .medium
+        dateFormatter1.timeStyle = .none
+        textField_Date.text = dateFormatter1.string(from: datePicker.date)
         textField_Date.resignFirstResponder()
     }
     func cancelClick() {
